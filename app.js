@@ -197,7 +197,7 @@ app.use("/trevell/api/v1/reviews", reviewRouter);
 app.use("/trevell/api/v1/bookings", bookingRouter);
 
 app.use("/", viewRouter);
-
+//express
 //SERVER CREATION
 app.listen(port, () => {
   console.log("Server created");
