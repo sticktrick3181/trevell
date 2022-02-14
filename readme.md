@@ -1,3 +1,3 @@
 # Trevell Application
 
-Built using moders=n technologies : node.js, express , mongoDB ,mongoose
+Built using modern technologies : node.js, express , mongoDB ,mongoose
