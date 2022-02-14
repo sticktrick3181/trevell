@@ -31,8 +31,8 @@ const signUp = async (req, res) => {
       role: req.body.role,
       photo: req.body.photo,
     });
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     await newUser.save();
     const url = `${req.protocol}://${req.get("host")}/user/me`;
     await new Email(newUser, url).sendWelcome();
@@ -142,7 +142,7 @@ const protect = async function (req, res, next) {
       "+password"
     );
     // console.log(resultExists);
-    console.log(typeof result.exp, typeof resultExists.passwordChangedAt);
+    // console.log(typeof result.exp, typeof resultExists.passwordChangedAt);
     if (!resultExists)
       res.status(401).json({
         message: "User doesn't exist",
@@ -199,8 +199,8 @@ const isLogedIn = async function (req, res, next) {
     //IF CONTROL REACHES HERE IT MEANS THERE IS A LOGGED IN USER
     //locals object inside res takes these params to the pug template like passing the variables while rendering
     res.locals.user = resultExists;
-    console.log("RES LOCALS FILE");
-    console.log(res.locals);
+    // console.log("RES LOCALS FILE");
+    // console.log(res.locals);
     return next();
     //IF ALL POSSIBLE THREATS ARE CHECKED AT THIS POINT,WE CAN CONTINUE FURTHUR.
   } else return next();
@@ -232,8 +232,8 @@ const protectAthor = ([...list]) =>
       // console.log(result.exp);
       //CHECK IF USER STILL EXISTS
       const resultExists = await User.findById(result.userToCheck._id);
-      console.log(resultExists);
-      console.log(typeof result.exp, typeof resultExists.passwordChangedAt);
+      // console.log(resultExists);
+      // console.log(typeof result.exp, typeof resultExists.passwordChangedAt);
       if (!resultExists)
         res.status(401).json({
           message: "User doesn't exist",
@@ -283,14 +283,14 @@ const forgotPassword = async function (req, res) {
   }
   try {
     const resetToken = await user.passwordResetTokenGenerator();
-    console.log(resetToken);
+    // console.log(resetToken);
     //SAVING THE ENCRYPTED TOKEN ON THE USERS DOCUMENT
     await user.save();
     //NOW WE WILL SEND THE ENCRYPTED TOKEN USING NODEMAILER😁
     const resetPasswordURL = `${req.protocol}://${req.get(
       "host"
     )}/trevell/api/v1/users/resetPassword/${resetToken}`;
-    console.log(resetPasswordURL);
+    // console.log(resetPasswordURL);
 
     await new Email(user, resetPasswordURL).sendPasswordResetToken();
     res.status(200).json({
@@ -319,7 +319,7 @@ const resetPassword = async function (req, res) {
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
-  console.log(encryptedToken);
+  // console.log(encryptedToken);
   const user = await User.findOne({
     passwordResetToken: encryptedToken,
     passwordResetTokenExpires: { $gt: Date.now() },
@@ -374,12 +374,12 @@ const updatePassword = async function (req, res) {
 };
 const updateUserInfo = async function (req, res) {
   try {
-    console.log("Existing User");
-    console.log(req.user);
-    console.log("Body");
-    console.log(req.body);
-    console.log("File");
-    console.log(req.file);
+    // console.log("Existing User");
+    // console.log(req.user);
+    // console.log("Body");
+    // console.log(req.body);
+    // console.log("File");
+    // console.log(req.file);
     const prevImage = req.user.photo;
     // if (!req.file) {
     //   req.file.filename = req.user.photo;
@@ -389,7 +389,7 @@ const updateUserInfo = async function (req, res) {
     } else {
       req.body.photo = req.user.photo;
     }
-    console.log(req.body);
+    // console.log(req.body);
     // const user1 = await User.findOne({ _id: req.user._id });
     // if (user1.role === "admin" || user1.role === "lead-guide") {
     //   res.status(404).json({
@@ -408,8 +408,8 @@ const updateUserInfo = async function (req, res) {
       if (!err) console.log("file deleted");
       else console.log("file not deleted");
     });
-    console.log("New Updated User");
-    console.log(user);
+    // console.log("New Updated User");
+    // console.log(user);
     res.status(200).json({
       status: "Success",
       message: user,

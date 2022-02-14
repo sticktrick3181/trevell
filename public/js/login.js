@@ -6,18 +6,18 @@ export const submitBtn = document.querySelector(".form--login");
 export const submitlistener = async function (e) {
   try {
     e.preventDefault();
-    console.log("pressed");
+    // console.log("pressed");
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
     const res = await axios({
       method: "POST",
-      url: "http://localhost:3000/trevell/api/v1/users/login",
+      url: "/trevell/api/v1/users/login",
       data: {
         email,
         password,
       },
     });
-    console.log(res);
+    // console.log(res);
 
     if (res.data.message === "Success") {
       showAlerts("success", "logged in!");

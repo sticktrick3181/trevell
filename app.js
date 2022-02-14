@@ -16,7 +16,7 @@ const reviewRouter = require("./routes/reviewRoutes");
 const bookingRouter = require("./routes/bookingRoutes");
 const { connectToDB } = require("./data/databaseconnection");
 const viewRouter = require("./routes/viewRoutes");
-
+const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
 const helmet = require("helmet");
@@ -159,7 +159,7 @@ app.use(
 //     },
 //   })
 // );
-
+app.use(compression());
 //DATA SANITIZATION FOR NoSQL INJECTIONS.
 app.use(mongoSanitize());
 

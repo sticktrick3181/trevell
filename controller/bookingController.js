@@ -15,8 +15,8 @@ exports.getCheckoutSession = async function (req, res) {
   // console.log("Hello");
   try {
     const trip = await Trip.findById(req.params.tripId);
-    console.log(trip);
-    console.log(`${req.protocol}://${req.get("host")}/trips/${trip.id}`);
+    // console.log(trip);
+    // console.log(`${req.protocol}://${req.get("host")}/trips/${trip.id}`);
 
     //create checkout session
     const session = await stripe.checkout.sessions.create({
@@ -55,8 +55,8 @@ exports.createBookingCheckout = async (req, res, next) => {
   //temporary
   try {
     const { trip, user, price } = req.query;
-    console.log("Things");
-    console.log(!trip && !user && !price);
+    // console.log("Things");
+    // console.log(!trip && !user && !price);
     if (!trip && !user && !price) return next();
     await Booking.create({ trip, user, price });
     res.redirect(req.originalUrl.split("?")[0]);

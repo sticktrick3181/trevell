@@ -18,7 +18,7 @@ export const newUser = async function (e) {
     // });
     const result = await axios({
       method: "POST",
-      url: "http://localhost:3000/trevell/api/v1/users",
+      url: "/trevell/api/v1/users",
       data: {
         firstName: fname,
         lastName: lname,
@@ -27,7 +27,7 @@ export const newUser = async function (e) {
         passwordConfirm: passwordC,
       },
     });
-    console.log(result);
+    // console.log(result);
     if (result.data.message === "Success") {
       showAlerts("success", "Signed in!");
       window.setTimeout(() => {

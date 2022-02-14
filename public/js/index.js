@@ -33,7 +33,7 @@ if (document.querySelector(".nav__el--logout")) {
       e.preventDefault();
       const res = await axios({
         method: "GET",
-        url: "http://localhost:3000/trevell/api/v1/users/logout",
+        url: "/trevell/api/v1/users/logout",
       });
       showAlerts("success", "logged out successfully!");
       window.setTimeout(() => {
@@ -59,7 +59,7 @@ if (document.querySelector(".form--signup"))
   signupForm.addEventListener("submit", newUser);
 
 //UPDATING PASSWORD
-console.log(document.getElementById("updating--password--form"));
+// console.log(document.getElementById("updating--password--form"));
 if (document.getElementById("updating--password--form"))
   updatingPasswordForm.addEventListener("submit", updatePasswordFunctionality);
 
@@ -69,7 +69,7 @@ if (document.querySelector("#book-trip")) {
   bookBtn.addEventListener("click", (e) => {
     e.target.textContent = "Processing...";
     const { tripId, userInfo } = e.target.dataset;
-    console.log(userInfo);
+    // console.log(userInfo);
     bookTrip(tripId);
   });
 }

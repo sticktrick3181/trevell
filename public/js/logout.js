@@ -5,7 +5,7 @@ logoutBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   const result = await axios({
     method: "GET",
-    url: "http://localhost:3000/trevell/api/v1/users/logout",
+    url: "/trevell/api/v1/users/logout",
   });
-  console.log(result);
+  // console.log(result);
 });

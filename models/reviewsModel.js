@@ -52,7 +52,7 @@ reviewsSchema.statics.calcAvgRating = async function (tripId) {
       },
     },
   ]);
-  console.log(stats);
+  // console.log(stats);
   await Trip.findByIdAndUpdate(tripId, {
     ratingsAverage: stats[0].avgRating,
     ratingsQuantity: stats[0].nRating,

@@ -8,7 +8,7 @@ export const bookTrip = async (tripId) => {
   try {
     //get checkout session from the server
     const session = await axios(
-      `http://localhost:3000/trevell/api/v1/bookings/checkoutSession/${tripId}`
+      `/trevell/api/v1/bookings/checkoutSession/${tripId}`
     );
     // console.log(session);
     if (session.data.status === "success") {

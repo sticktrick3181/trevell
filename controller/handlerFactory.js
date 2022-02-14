@@ -75,7 +75,7 @@ exports.getAll = (Model, populateOptions) =>
         queryString = queryString.replace(/\b(gte|lt|lte|gt)\b/g, (match) => {
           return `$${match}`;
         });
-        console.log(JSON.parse(queryString));
+        // console.log(JSON.parse(queryString));
         req.query = JSON.parse(queryString);
       }
       //   console.log(req.query);

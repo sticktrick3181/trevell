@@ -25,17 +25,17 @@ export const updationFuntionality = async function (e) {
     if (document.getElementById("photo").files) {
       form.append("photo", document.getElementById("photo").files[0]);
     }
-    console.log("Current user photo");
+    // console.log("Current user photo");
     // console.log(form);
     //selecting files usging dom
     // const photo = document.getElementById("photo").files[0];
     const newUser = await axios({
       method: "PATCH",
-      url: "http://localhost:3000/trevell/api/v1/users/updateUserInfo",
+      url: "/trevell/api/v1/users/updateUserInfo",
       data: form,
     });
-    console.log("Updated one");
-    console.log(newUser);
+    // console.log("Updated one");
+    // console.log(newUser);
     if (newUser.data.status === "Success") {
       showAlerts("success", "updated successfully");
       window.setTimeout(() => {
@@ -48,32 +48,32 @@ export const updationFuntionality = async function (e) {
     }
   } catch (err) {
     showAlerts("success", "Reload for the applied changes");
-    console.log(err);
+    // console.log(err);
   }
 };
 export const updatePasswordFunctionality = async function (e) {
   e.preventDefault();
   try {
-    console.log("pressed");
+    // console.log("pressed");
     //   console.log("done");
 
     const existingPassword = document.getElementById("password-current").value;
-    console.log(existingPassword);
+    // console.log(existingPassword);
     const newPassword = document.getElementById("password").value;
-    console.log(newPassword);
+    // console.log(newPassword);
     const confirmPassword = document.getElementById("password-confirm").value;
-    console.log(confirmPassword);
-    console.log({ newPassword, confirmPassword, existingPassword });
+    // console.log(confirmPassword);
+    // console.log({ newPassword, confirmPassword, existingPassword });
     const result = await axios({
       method: "PATCH",
-      url: "http://localhost:3000/trevell/api/v1/users/updatePassword",
+      url: "/trevell/api/v1/users/updatePassword",
       data: {
         newPassword,
         confirmPassword,
         existingPassword,
       },
     });
-    console.log(result);
+    // console.log(result);
     if (result.data.status === "Success") {
       showAlerts("success", "Password updated successfully");
       window.setTimeout(() => {
