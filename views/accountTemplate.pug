@@ -1,0 +1,90 @@
+extend base
+
+
+mixin navItem(text,link,icon,activeClass)
+  li(class=`${activeClass ? 'side-nav--active' : ''}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`/img/icons.svg#icon-${icon}`)
+      | #{text}
+
+block content 
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+
+          +navItem('Settings','#','settings',true)
+          +navItem('My bookings','/user/me/my-trips','briefcase',false)
+          +navItem('My reviews','#','star',false)
+          +navItem('Billing','#','credit-card',false)
+          //- li.side-nav--active
+          //-   a(href='#')
+          //-     svg
+          //-       use(xlink:href='img/icons.svg#icon-settings')
+          //-     | Settings
+          //- li
+          //-   a(href='#')
+          //-     svg
+          //-       use(xlink:href='img/icons.svg#icon-briefcase')
+          //-     | My bookings
+
+
+        if(user.role === 'admin' || user.role === 'lead-guide')
+          .admin-nav
+            h5.admin-nav__heading=`${user.role.toUpperCase()}`
+            ul.side-nav
+              +navItem('Manage tours' , '#','map')
+              +navItem('Manage users' , '#','users')
+              +navItem('Manage reviews' , '#','star')
+              //- li
+              //-   a(href='#')
+              //-     svg
+              //-       use(xlink:href='/img/icons.svg#icon-map')
+              //-     | Manage tours
+              //- li
+              //-   a(href='#')
+              //-     svg
+              //-       use(xlink:href='/img/icons.svg#icon-users')
+              //-     | Manage users
+              //- li
+              //-   a(href='#')
+              //-     svg
+              //-       use(xlink:href='/img/icons.svg#icon-star')
+              //-     | Manage reviews
+              //- li
+              //-   a(href='#')
+              //-     svg
+              //-       use(xlink:href='img/icons.svg#icon-briefcase')
+
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md Your account settings
+          form.form.form-user-data
+            .form__group
+              label.form__label(for='name') Name
+              input#name.form__input(type='text', value=`${user.firstName} ${user.lastName}`, required)
+            .form__group.ma-bt-md
+              label.form__label(for='email') Email address
+              input#email.form__input(type='email', value=`${user.email}`, required)
+            .form__group.form__photo-upload
+              img.form__user-photo(src=`/img/users1/${user.photo}`, alt='User photo')
+              input(class='form__upload',type='file',id='photo',name='photo')
+              label(for='photo') Choose new photo
+            .form__group.right
+              button.btn.btn--small.btn--green Save settings
+        .line &nbsp;
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md Password change
+          form#updating--password--form.form.form-user-settings
+            .form__group
+              label.form__label(for='password-current') Current password
+              input#password-current.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group
+              label.form__label(for='password') New password
+              input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.ma-bt-lg
+              label.form__label(for='password-confirm') Confirm password
+              input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.right
+              button#updating--password--btn.btn.btn--small.btn--green(form='updating--password--form') Save password

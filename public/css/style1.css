@@ -1,0 +1,41 @@
+.picture-tray {
+  margin-bottom: 8%;
+  margin-top: 8%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  /* border: 5px solid red; */
+  font-family: "Lato", sans-serif;
+  color: #777;
+  font-size: 20px;
+}
+
+.picture-tray ul {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+}
+
+.picture-tray li {
+  text-align: center;
+  display: inline-block;
+  list-style: none;
+  position: relative;
+  /* border: solid 12px #fff; */
+  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+
+  /* box-shadow: 0 0 15px 0px #555;
+  transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  top: 50px; */
+}
+
+.picture-tray img {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}

@@ -1,0 +1,68 @@
+doctype html 
+html 
+
+    block head 
+        head 
+            meta( charset="UTF-8")
+            meta(name="viewport" content="width=device-width    initial-scale=1.0")
+            meta(http-equiv='Content-Security-Policy' unsafe-inline content="default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self' 'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw=';")
+
+            link(rel = 'stylesheet' href = '/css/style.css')
+            script(src='https://js.stripe.com/v3/')
+            link(rel = 'stylesheet' href = '/css/style1.css')
+            link(rel  = 'shortcut icon' type = 'image/png' href = '/favicon_io/favicon-32x32.png') 
+            title=`trevell  | ${title}`
+
+    body 
+        //header
+        include _header
+
+
+        //content
+        block content  
+
+        //footer
+        include _footer
+
+
+
+        //- script(defer src=`https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js`) 
+        //- script(defer src=`/js/mapbox.js`) 
+        //- script(defer  src=`/js/login.js`) 
+        //- script(defer src = `/js/logout.js`)
+        script(defer src = `/js/bundle.js`)
+
+
+
+    
+
+
+
+
+
+//-  <header class="header">
+//-       <nav class="nav nav--tours">
+//-         <a href="#" class="nav__el">All tours</a>
+//-       </nav>
+//-       <div class="header__logo">
+//-         <img src="img/logo-white.png" alt="Natours logo" />
+//-       </div>
+//-       <nav class="nav nav--user">
+//-         <a href="#" class="nav__el">My bookings</a>
+//-         <a href="#" class="nav__el">
+//-           <img src="img/user.jpg" alt="User photo" class="nav__user-img" />
+//-           <span>Jonas</span>
+//-         </a>
+
+//-         <!-- <button class="nav__el">Log in</button>
+//-                 <button class="nav__el nav__el--cta">Sign up</button> -->
+//-       </nav>
+//-     </header>
+
+
+
+
+
+
+        h1=trip  
+        p Just some cool text!    

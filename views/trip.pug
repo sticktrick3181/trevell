@@ -1,0 +1,289 @@
+extends base
+block prepend head
+        script(src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js')
+        script(src='https://js.stripe.com/v3/')
+        link(href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet')
+        
+block content 
+    //- //- HEADER SECTION
+    section.section-header
+        .header__hero 
+            .header__hero-overlay &nbsp;
+            img.header__hero-img(src=`/img/trips1/${trip.coverImage}`)
+        .heading-box
+            h1.heading-primary
+                span=`${trip.name}`
+            .heading-box__group
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-clock')
+                    span.heading-box__text=`${trip.duration} days`
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-map-pin')
+                    span.heading-box__text= `${trip.city},India`
+    //- section.section-pictures
+    //-     each image of trip.images
+    //-         .picture-box
+    //-             img.picture-box__img.picture-box__img--1(src=`/img/${image}` alt=`${trip.name}`)  
+
+            //- li
+            //-     img(src='https://unsplash.it/400/400' width='200')
+            //-     p image #2
+            //- li
+            //-     img(src='https://unsplash.it/500/500' width='200')
+            //-     p image #3
+            //- li
+            //-     img(src='https://unsplash.it/200/200' width='200')
+            //-     p image #4
+
+
+    //-DESCRIPTION SECTION
+
+    section.section-description
+        .overview-box
+            div
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Quick facts
+                    //- .overview-box__detail
+                    //-     svg.overview-box__icon
+                    //-         use(xlink:href='/img/icons.svg#icon-map')
+                    //-     span.overview-box__label Next date
+                    //-     span.overview-box__text=`${trip.locations[0].toLocaleString('en',{month : 'long',year : 'numeric'})}`
+                    //- .overview-box__detail
+                    //-     svg.overview-box__icon
+                    //-         use(xlink:href='/img/icons.svg#icon-trending-up')
+                    //-     span.overview-box__label Difficulty
+                    //-     span.overview-box__text Medium
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-user')
+                        span.overview-box__label Participants Per Trip
+                        span.overview-box__text #{trip.maxGroupSize} people
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-star')
+                        span.overview-box__label Rating
+                        span.overview-box__text #{trip.ratingsAverage.toFixed(1)} / 5
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-list')
+                        span.overview-box__label Languages 
+                        each language in trip.languages
+                            -const l = language.toUpperCase() + ' ';
+                                span.overview-box__text  ➡️#{l}
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Your tour guides
+                    each person of trip.guides
+                        .overview-box__detail
+                            img.overview-box__img(src=`/img/users1/${person.photo}` alt=`${person.role.toUpperCase()}`)
+                            -const role = (person.role.toUpperCase() === 'GUIDE') ? 'TOUR GUIDE' : 'LEAD GUIDE';
+                            span.overview-box__label=`${role}`
+                            span.overview-box__text=`${person.firstName} ${person.lastName}`
+                    //- .overview-box__detail
+                    //-     img.overview-box__img(src='img/users/user-18.jpg' alt='Tour guide')
+                    //-     span.overview-box__label Tour guide
+                    //-     span.overview-box__text Lisa Brown
+                    //- .overview-box__detail
+                    //-     img.overview-box__img(src='img/users/user-17.jpg' alt='Intern')
+                    //-     span.overview-box__label Intern
+                    //-     span.overview-box__text Max Smith
+        .description-box
+            h2.heading-secondary.ma-bt-lg About the #{trip.name}
+            p.description__text=`${trip.summary}`
+
+
+
+    //-MAP SECTION
+
+
+    //- section.section-map
+    //-     #map
+    //-         script.
+    //-             mapboxgl.accessToken =
+    //-             "pk.eyJ1Ijoiam9uYXNzY2htZWR0bWFubiIsImEiOiJjam54ZmM5N3gwNjAzM3dtZDNxYTVlMnd2In0.ytpI7V7w7cyT1Kq5rT9Z1A";
+    //-             const geojson = {
+    //-             type: "FeatureCollection",
+    //-             features: [
+    //-             {
+    //-             type: "Feature",
+    //-             geometry: {
+    //-             type: "Point",
+    //-             coordinates: [-112.987418, 37.198125],
+    //-             },
+    //-             properties: {
+    //-             description: "Zion Canyon National Park",
+    //-             },
+    //-             },
+    //-             {
+    //-             type: "Feature",
+    //-             geometry: {
+    //-             type: "Point",
+    //-             coordinates: [-111.376161, 36.86438],
+    //-             },
+    //-             properties: {
+    //-             description: "Antelope Canyon",
+    //-             },
+    //-             },
+    //-             {
+    //-             type: "Feature",
+    //-             geometry: {
+    //-             type: "Point",
+    //-             coordinates: [-112.115763, 36.058973],
+    //-             },
+    //-             properties: {
+    //-             description: "Grand Canyon National Park",
+    //-             },
+    //-             },
+    //-             {
+    //-             type: "Feature",
+    //-             geometry: {
+    //-             type: "Point",
+    //-             coordinates: [-116.107963, 34.011646],
+    //-             },
+    //-             properties: {
+    //-             description: "Joshua Tree National Park",
+    //-             },
+    //-             },
+    //-             ],
+    //-             };
+    //-             const map = new mapboxgl.Map({
+    //-             container: "map",
+    //-             style: "mapbox://styles/jonasschmedtmann/cjnxfn3zk7bj52rpegdltx58h",
+    //-             scrollZoom: false,
+    //-             });
+    //-             const bounds = new mapboxgl.LngLatBounds();
+    //-             geojson.features.forEach(function (marker) {
+    //-             var el = document.createElement("div");
+    //-             el.className = "marker";
+    //-             new mapboxgl.Marker({
+    //-             element: el,
+    //-             anchor: "bottom",
+    //-             })
+    //-             .setLngLat(marker.geometry.coordinates)
+    //-             .addTo(map);
+    //-             new mapboxgl.Popup({
+    //-             offset: 30,
+    //-             closeOnClick: false,
+    //-             })
+    //-             .setLngLat(marker.geometry.coordinates)
+    //-             .setHTML("<p>" + marker.properties.description + "</p>")
+    //-             .addTo(map);
+    //-             bounds.extend(marker.geometry.coordinates);
+    //-             });
+    //-             map.fitBounds(bounds, {
+    //-             padding: {
+    //-             top: 200,
+    //-             bottom: 150,
+    //-             left: 50,
+    //-             right: 50,
+    //-             },
+    //-             });
+    //-             map.on("load", function () {
+    //-             map.addLayer({
+    //-             id: "route",
+    //-             type: "line",
+    //-             source: {
+    //-             type: "geojson",
+    //-             data: {
+    //-             type: "Feature",
+    //-             properties: {},
+    //-             geometry: {
+    //-             type: "LineString",
+    //-             coordinates: [
+    //-             [-112.987418, 37.198125],
+    //-             [-111.376161, 36.86438],
+    //-             [-112.115763, 36.058973],
+    //-             [-116.107963, 34.011646],
+    //-             ],
+    //-             },
+    //-             },
+    //-             },
+    //-             layout: {
+    //-             "line-join": "round",
+    //-             "line-cap": "round",
+    //-             },
+    //-             paint: {
+    //-             "line-color": "#55c57a",
+    //-             "line-opacity": 0.6,
+    //-             "line-width": 3,
+    //-             },
+    //-             });
+    //-             });
+
+
+
+
+    
+        //-CREATING PICS SECTION OUT OF REVIEWS
+    section.section-pics 
+        //- .reviews
+        //-     each rev in  trip.reviews
+        //-         .reviews__card
+        //-             .reviews__avatar
+        //-                 img.reviews__avatar-img(src=`/img/placeholder_guides.png` alt=`${rev.user.firstName} ${rev.user.lastName}`)
+        //-                 h6.reviews__user=`${rev.user.firstName} ${rev.user.lastName}`
+        //-             p.reviews__text=`${rev.review}`
+        //-             .reviews__rating
+        //-                 each star in [1,2,3,4,5]
+        //-                     svg.reviews__star( class =`reviews__star--${(star < rev.rating) ? 'active' : 'inactive'}`)
+        //-                         use(xlink:href='/img/icons.svg#icon-star')
+        //-                 //- .picture-box
+        //-                 //-     img.picture-box__img.picture-box__img--2(src='img/tour-5-2.jpg' alt='The Park Camper Tour 1')
+        //-                 //- .picture-box
+        //-                 //-     img.picture-box__img.picture-box__img--3(src='img/tour-5-3.jpg' alt='The Park Camper Tour 1')
+        each image in trip.images 
+            img(src=`/img/trips1/${image}`)
+            //- img(src="/img/bir2.jpeg")
+            //- img(src="/img/bir3.jpeg")
+            //- img(src="/img/mus1.jpeg")
+            //- img(src="/img/mus2.jpeg")
+
+
+
+
+     
+    //- section.section-map
+    //-     #map(data-locations=`${JSON.stringify(trip.locations)}`)
+
+
+
+    section.section-reviews
+        .reviews
+            each rev in  trip.reviews
+                .reviews__card
+                    .reviews__avatar
+                        img.reviews__avatar-img(src=`/img/placeholder_guides.png` alt=`${rev.user.firstName} ${rev.user.lastName}`)
+                        h6.reviews__user=`${rev.user.firstName} ${rev.user.lastName}`
+                    p.reviews__text=`${rev.review}`
+                    .reviews__rating
+                        each star in [1,2,3,4,5]
+                            svg.reviews__star( class =`reviews__star--${(star < rev.rating) ? 'active' : 'inactive'}`)
+                                use(xlink:href='/img/icons.svg#icon-star')
+                        //- .picture-box
+                        //-     img.picture-box__img.picture-box__img--2(src='img/tour-5-2.jpg' alt='The Park Camper Tour 1')
+                        //- .picture-box
+                        //-     img.picture-box__img.picture-box__img--3(src='img/tour-5-3.jpg' alt='The Park Camper Tour 1')
+
+
+
+
+    section.section-cta
+        .cta
+            .cta__img.cta__img--logo
+                img(src='/favicon_io/android-chrome-512x512.png' width='10px' alt='trevell logo')
+            img.cta__img.cta__img--1(src=`/img/trips1/${trip.images[0]}` alt=`/img/${trip.images[0]}`)
+            img.cta__img.cta__img--2(src=`/img/trips1/${trip.images[1]}` alt=`/img/${trip.images[1]}`)
+            .cta__content
+                h2.heading-secondary What are you waiting for?
+                p.cta__text
+                    | #{trip.duration} days. 1 adventure. Infinite memories. Make it yours today!
+                    br
+                    br
+                    if user 
+                      button.btn.btn--green.span-all-rows#book-trip(data-trip-id=`${trip.id}` data-user-info=`${user}`) Book trip now!
+                    else
+                      a.btn.btn--green.span-all-rows(href='/user/login') Login to book trip!
+
+
+

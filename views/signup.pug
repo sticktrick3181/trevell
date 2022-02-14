@@ -1,0 +1,47 @@
+
+extend base
+block content 
+    main.main
+        .signin-form
+            h2.heading-secondary.ma-bt-lg Sign In
+            form.form.form--signup(autocomplete='off')
+                .form__group
+                    label.form__label(for='firstName') First Name
+                    input.form__input__signin#fname(type='firstName', placeholder='First Name',   required)
+                .form__group
+                    label.form__label(for=' secondName') Second Name
+                    input.form__input__signin#lname(type=' secondName', placeholder=' Second Name',   required)
+                .form__group
+                    label.form__label(for='email') Email address
+                    input.form__input__signin#email-signup(value='',type='email', placeholder='you@examplecom',    required)
+                .form__group.ma-bt-md
+                    label.form__label(for='password') Password
+                    input.form__input__signin#password-signup(value='',type='password',placeholder='••••••••', required, minlength='8')
+                .form__group.ma-bt-md
+                    label.form__label(for='passwordConfirm') Password Confirm
+                    input.form__input__signin#passwordConfirm-signup(type='password',placeholder='••••••••', required, minlength='8')
+                .form__group
+                    button.btn.btn--green SignIn
+        //- .login-form
+        //-     h2.heading-secondary.ma-bt-lg Create New Account
+        //-     form.form(id='form--new--user')
+        //-         .form__group
+        //-             label.form__label(for='firstName') First Name
+        //-             input#firstNameSignUp.form__input(type='first-name', placeholder='first name',    required)
+        //-         .form__group
+        //-             label.form__label(for='secondName') Second Name (optional)
+        //-             input#secondNameSignUp.form__input(type='first-name', placeholder='second name')
+        //-         .form__group
+        //-             label.form__label(for='email') Email Address
+        //-             input#emailSignUp.form__input(type='email', placeholder='you@example.com',  onfocus="this.value=''",  required)
+        //-         .form__group#passwordSignUp.ma-bt-md
+        //-             label.form__label(for='password') Password
+        //-             input#password1.form__input.login--password_ph(type='password', onfocus="this.value=''",placeholder='••••••••', required, minlength='8')
+        //-         .form__group#passwordConfirmSignUp.ma-bt-md
+        //-             label.form__label(for='password confirm') Password Confirm
+        //-             input#password2.form__input.login--password_ph(type='password',placeholder='••••••••', required, minlength='8')
+        //-         .form__group#photoUploadSignUp.form__photo-upload
+        //-             img.form__user-photo(src='/img/placeholder_guides.png', alt='User photo')
+        //-             a.btn-text(href='') Choose a photo (optional)
+        //-         .form__group
+        //-             button.btn.btn--green(id='submit--new--user') Sign Up

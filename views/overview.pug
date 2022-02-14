@@ -1,0 +1,43 @@
+
+extends base
+block content 
+    main.main 
+        .card-container 
+
+            each trip in allTrips 
+                .card
+                    .card__header
+                        .card__picture
+                            .card__picture-overlay &nbsp;
+                            img.card__picture-img(src = `/img/trips1/${trip.coverImage}` alt=`${trip.name}`)
+                        h3.heading-tertirary
+                            span #{trip.name}
+                    .card__details
+                        h4.card__sub-heading #{trip.duration}-day trip 
+                        p.card__text= trip.summary.slice(0,100) + '...'  
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='/img/icons.svg#icon-map-pin')
+                            span #{trip.city}, India
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='/img/icons.svg#icon-calendar')
+                            span=`${trip.createdAt.toLocaleString('en',{month : 'long',year : 'numeric'})}`
+                        .card__data 
+                            svg.card__icon
+                                use(xlink:href='/img/icons.svg#icon-flag')
+                            span #{trip.locations.length} stops
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='/img/icons.svg#icon-user')
+                            span #{trip.maxGroupSize} people
+                    .card__footer
+                        p
+                            span.card__footer-value ₹#{trip.price}
+                            | 
+                            span.card__footer-text per person
+                            | 
+                        p.card__ratings
+                            span.card__footer-value=`${trip.ratingsAverage.toFixed(1)}`
+                            span.card__footer-text=`ratings (${trip.ratingsQuantity})`
+                        a.btn.btn--green.btn--small(href=`/trips/${trip._id}`) Details
