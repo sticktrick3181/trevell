@@ -6,9 +6,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 //SERVING STATIC FILES
 app.use(express.static(path.join(__dirname, "public")));
-
 const port = process.env.PORT || 3000;
-
 const morgan = require("morgan");
 const tripRouter = require("./routes/tripRoutes");
 const userRouter = require("./routes/userRoutes");
