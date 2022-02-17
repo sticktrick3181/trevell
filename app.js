@@ -157,6 +157,7 @@ app.use(
 //     },
 //   })
 // );
+console.log("Working witjh Heroku");
 app.use(compression());
 //DATA SANITIZATION FOR NoSQL INJECTIONS.
 app.use(mongoSanitize());
