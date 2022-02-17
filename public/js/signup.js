@@ -9,6 +9,9 @@ export const newUser = async function (e) {
     const email = document.querySelector("#email-signup").value;
     const password = document.querySelector("#password-signup").value;
     const passwordC = document.querySelector("#passwordConfirm-signup").value;
+    const city = document.querySelector("#city").value;
+    const state = document.querySelector("#state").value;
+
     // console.log({
     //   firstName: fname,
     //   lastName: lname,
@@ -25,6 +28,7 @@ export const newUser = async function (e) {
         email: email,
         password: password,
         passwordConfirm: passwordC,
+        address: `${city},${state},INDIA`,
       },
     });
     // console.log(result);

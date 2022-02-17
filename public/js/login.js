@@ -4,6 +4,7 @@ export const submitBtn = document.querySelector(".form--login");
 // document.querySelector(".login--email_ph").value = "";
 // document.querySelector(".login--password_ph").value = "";
 export const submitlistener = async function (e) {
+  console.log("Pressed");
   try {
     e.preventDefault();
     // console.log("pressed");

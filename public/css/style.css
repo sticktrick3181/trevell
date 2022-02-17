@@ -1504,3 +1504,12 @@ body {
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
 }
+#btn--color{
+  color: #20bf6b;
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+
+}
