@@ -13,6 +13,8 @@ const {
   signupUser,
   account,
   getMyTrips,
+  forgotPasswordPage,
+  resetPasswordPage,
   errorPage,
 } = require("../controller/viewController");
 const bookingController = require("../controller/bookingController");
@@ -25,6 +27,9 @@ router.use(isLogedIn);
 router.get("/", bookingController.createBookingCheckout, getOverview);
 router.get("/user/me/my-trips", protect, getMyTrips);
 router.get("/trips/:id", isLogedIn, getTrip);
+router.get("/user/forgotPassword", forgotPasswordPage);
+router.get("/user/resetPassword/:token", resetPasswordPage);
+
 // router.get("/user/login", logoutUser);
 router.get("/user/me", isLogedIn, protect, account);
 

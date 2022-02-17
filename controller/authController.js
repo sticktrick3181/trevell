@@ -289,7 +289,7 @@ const forgotPassword = async function (req, res) {
     //NOW WE WILL SEND THE ENCRYPTED TOKEN USING NODEMAILER😁
     const resetPasswordURL = `${req.protocol}://${req.get(
       "host"
-    )}/trevell/api/v1/users/resetPassword/${resetToken}`;
+    )}/user/resetPassword/${resetToken}`;
     // console.log(resetPasswordURL);
 
     await new Email(user, resetPasswordURL).sendPasswordResetToken();
@@ -319,6 +319,7 @@ const resetPassword = async function (req, res) {
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
+  console.log("token", encryptedToken);
   // console.log(encryptedToken);
   const user = await User.findOne({
     passwordResetToken: encryptedToken,

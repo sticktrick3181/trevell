@@ -70,3 +70,14 @@ exports.signupUser = function (req, res) {
     type: "New User",
   });
 };
+exports.forgotPasswordPage = function (req, res) {
+  res.status(200).render("forgotPasswordPage", {
+    title: "Forgot Password",
+  });
+};
+
+exports.resetPasswordPage = function (req, res) {
+  res.status(200).render("resetPassword", {
+    title: "Reset Password",
+  });
+};

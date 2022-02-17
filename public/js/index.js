@@ -1,5 +1,14 @@
 import "@babel/polyfill";
 import { submitBtn, submitlistener } from "./login";
+import {
+  submitBtnForgotPassword,
+  submitlistenerForgotPassword,
+} from "./forgotPassword";
+
+import {
+  submitBtnResetPassword,
+  submitlistenerResetPassword,
+} from "./resetPassword";
 import { displayMap } from "./mapbox";
 import { showAlerts } from "./alertsHandler";
 import axios from "axios";
@@ -17,6 +26,20 @@ console.log("Bundle working fine just checking");
 
 //LOGIN
 if (submitBtn) submitBtn.addEventListener("submit", submitlistener);
+
+//FORGOT PASSWORD
+if (submitBtnForgotPassword)
+  submitBtnForgotPassword.addEventListener(
+    "submit",
+    submitlistenerForgotPassword
+  );
+
+//RESET PASSWORD
+if (submitBtnResetPassword)
+  submitBtnResetPassword.addEventListener(
+    "submit",
+    submitlistenerResetPassword
+  );
 
 //MAP
 if (document.getElementById("map")) {

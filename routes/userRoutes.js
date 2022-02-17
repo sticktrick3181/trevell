@@ -25,10 +25,10 @@ router.route("/login").post(login);
 router.route("/logout").get(logOut);
 
 //PROTECTION NEEDED FOR THE BELOW ROUTES SO ITS PROVIDED THROUGH COMMON MIDDLEWARE
-router.use(protect);
-router.route("/me").get(myInfo);
 router.route("/forgotPassword").post(forgotPassword);
 router.route("/resetPassword/:token").patch(resetPassword);
+router.use(protect);
+router.route("/me").get(myInfo);
 router.route("/updatePassword").patch(updatePassword);
 router.route("/deactivate").delete(deactivate);
 //  UPDATE USER BY USER ITSELF
