@@ -12,7 +12,8 @@ import {
 // import { hideAlert, showAlerts } from "./alertsHandler";
 
 import { bookTrip } from "./stripe";
-console.log("Bundle working fine");
+
+console.log("Bundle working fine just checking");
 
 //LOGIN
 if (submitBtn) submitBtn.addEventListener("submit", submitlistener);
