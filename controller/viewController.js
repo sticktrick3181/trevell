@@ -14,13 +14,13 @@ exports.getTrip = async function (req, res) {
     path: "reviews",
     fields: "user review rating",
   });
+  console.log(trip);
   res
     .status(200)
     .set(
       "Content-Security-Policy",
       "default-src 'self' https://.mapbox.com https://.stripe.com ;base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src https://cdnjs.cloudflare.com https://api.mapbox.com https://js.stripe.com 'self' blob: ;script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests;"
     )
-
     .render("trip", {
       title: trip.name,
       trip,
@@ -52,7 +52,7 @@ exports.getMyTrips = async function (req, res) {
   const tripIds = bookings.map((e) => e.trip);
   const trips = await Trip.find({ _id: { $in: tripIds } });
 
-  res.status(200).render("overview", {
+  res.status(200).render("myBooked", {
     title: "My Trips",
     allTrips: trips,
   });

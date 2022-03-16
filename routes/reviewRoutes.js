@@ -16,7 +16,7 @@ router.use(protect);
 router
   .route("/")
   .get(getReviews)
-  .post(protectAthor("user"), setTripUserIds, addReview);
+  .post(protectAthor("user", "guide"), setTripUserIds, addReview);
 router.route("/:id").get(getReview);
 //AUTHORITY
 router.use(protectAthor("admin", "lead-guide"));

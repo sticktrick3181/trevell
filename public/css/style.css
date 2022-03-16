@@ -8,7 +8,7 @@
 }
 
 ::selection {
-  background-color: #55c57a;
+  /* background-color: #55c57a; */
   color: #fff;
 }
 
@@ -251,13 +251,27 @@ body {
   background-color: #55c57a;
   color: #fff;
 }
+
 .btn--green::after {
   background-color: #55c57a;
+}
+.btn--red {
+  background-color: #9e2222;
+  color: #fff;
+}
+.btn--red::after {
+  background-color: #ff0000;
+
 }
 
 .btn--small {
   padding: 1.25rem 3rem !important;
   font-size: 1.4rem !important;
+}
+
+.btn--small--myBooked {
+  padding: 1.25rem 3rem !important;
+  font-size: 1rem !important;
 }
 
 .btn-small,

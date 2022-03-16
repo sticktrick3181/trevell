@@ -250,10 +250,10 @@ block content
 
     section.section-reviews
         .reviews
-            each rev in  trip.reviews
+            each rev in trip.reviews
                 .reviews__card
                     .reviews__avatar
-                        img.reviews__avatar-img(src=`/img/placeholder_guides.png` alt=`${rev.user.firstName} ${rev.user.lastName}`)
+                        img.reviews__avatar-img(src=`/img/users1/${rev.user.photo}` alt=`${rev.user.firstName} ${rev.user.lastName}`)
                         h6.reviews__user=`${rev.user.firstName} ${rev.user.lastName}`
                     p.reviews__text=`${rev.review}`
                     .reviews__rating
