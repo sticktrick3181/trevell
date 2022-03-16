@@ -31,6 +31,7 @@ const tripsSchema = new mongoose.Schema(
     },
     coverImage: {
       type: String,
+      default: "placeholder_coverImage.jpeg",
       required: [true, "Cover image needed"],
     },
     maxGroupSize: {
@@ -80,6 +81,12 @@ const tripsSchema = new mongoose.Schema(
           enum: ["Point"],
         },
         coordinates: [Number],
+      },
+      {
+        place: { type: String },
+      },
+      {
+        day: Number,
       },
     ],
     guides: [
