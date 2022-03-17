@@ -44,6 +44,7 @@ const userSchema = new mongoose.Schema({
   },
   photo: { type: String, default: "placeholder_guides.png" },
   address: String,
+
   accountCreated: {
     type: Date,
     default: Date.now(),
