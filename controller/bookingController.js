@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 
 const Booking = require("../models/bookingsModel");
 const factory = require("../controller/handlerFactory");
+const endPointSecret = "whsec_oG6rKlyGFVNDDLSm53U9Wfa13iR05z6t";
 
 // console.log("Secret stripe");
 const Stripe = require("stripe");
@@ -36,7 +37,7 @@ exports.getCheckoutSession = async function (req, res) {
         {
           name: `${trip.name} Trip`,
           description: trip.summary,
-          images: [],
+          images: [`${req.protocol}://${req.get("host")}/img/trips1/${trip.coverImage}`],
           amount: trip.price * 100,
           currency: "inr",
           quantity: 1,
@@ -60,24 +61,26 @@ exports.getCheckoutSession = async function (req, res) {
  const createBookingCheckout = async session => {
    const trip = session.client_reference_id;
    const user = (await User.findOne({email : session.customer_email})).id;
-   const price = session.line_items[0].amount / 100;
+   const price = session.display_items[0].amount / 100;
    await Booking.create({trip , user , price});
 
  }
-exports.webhookCheckout = async (req,res,next) => {
-
+exports.webhookCheckout = async (req,res) => {
 
   const signature = req.headers['stripe-signature'];
   let event;
   try
   {
-   event  = stripe.webhooks.constructEvent(req.body , signature , process.env(STRIPE_WEBHOOK_SECRET));}
-  catch(err){
-  return res.status(400).send(`Webhook Error : ${err.message} `);
+   event  = stripe.webhooks.constructEvent(req.body , signature , endPointSecret);
   }
 
-  if(event.type === 'checkout.session.complete')
-    createBookingCheckout(event.data.object);
+  catch(err){
+  res.status(400).send(`Webhook Error : ${err.message} `);
+  return;
+  }
+
+  if(event.type === 'checkout.session.completed')
+     createBookingCheckout(event.data.object);
 
 
   res.status(200).json({recieved : true}); 
