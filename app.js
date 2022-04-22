@@ -16,6 +16,7 @@ const { connectToDB } = require("./data/databaseconnection");
 const viewRouter = require("./routes/viewRoutes");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
+const cors = require('cors');
 
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -74,6 +75,10 @@ app.use(
     },
   })
 );
+//IMPLEMENTING CORS
+app.use(cors());
+app.options('*' , cors());
+// SETS ACCESS-CONTROL-ALLOW-ORIGIN => *
 
 // app.use(
 //   helmet({
