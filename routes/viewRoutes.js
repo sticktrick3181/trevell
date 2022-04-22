@@ -24,7 +24,7 @@ router.get("/user/login", loginUser);
 router.get("/user/signup", signupUser);
 router.use(isLogedIn);
 
-router.get("/", bookingController.createBookingCheckout, getOverview);
+router.get("/", getOverview);
 router.get("/user/me/my-trips", protect, getMyTrips);
 router.get("/trips/:id", isLogedIn, getTrip);
 router.get("/user/forgotPassword", forgotPasswordPage);

@@ -12,6 +12,8 @@ const tripRouter = require("./routes/tripRoutes");
 const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
 const bookingRouter = require("./routes/bookingRoutes");
+const bookingController = require("./controller/bookingController");
+
 const { connectToDB } = require("./data/databaseconnection");
 const viewRouter = require("./routes/viewRoutes");
 const compression = require("compression");
@@ -167,6 +169,10 @@ app.use(compression());
 //DATA SANITIZATION FOR NoSQL INJECTIONS.
 app.use(mongoSanitize());
 
+
+//DATABASE CONNECTION
+connectToDB();
+
 //DATA SANITIZATION AGAINST XSS attacks.
 
 //DATA SANITIZATION
@@ -179,8 +185,8 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-//DATABASE CONNECTION
-connectToDB();
+app.post('/webhook-checkout' , express.raw({type : 'application/json'}) ,  bookingController.webhookCheckout)
+
 
 //EXPRESS INBUILT DATA FORMATTER
 app.use(express.json());
