@@ -45,14 +45,14 @@ exports.account = async function (req, res) {
 exports.getMyTrips = async function (req, res) {
   // console.log(req.user);
   const id = req.user._id;
-  // console.log(id);
+  // console.log("User Id" , id);
   //find all bookings
   const bookings = await Booking.find({ user: id });
-  // console.log(bookings);
+  // console.log(  "Booking", bookings);
   const tripIds = bookings.map((e) => e.trip);
   const trips = await Trip.find({ _id: { $in: tripIds } });
-  console.log("MyBooked Trips");
-  console.log({trips : trips});
+  // console.log("MyBooked Trips");
+  // console.log({trips : trips});
 
   res.status(200).render("myBooked", {
     title: "My Trips",
